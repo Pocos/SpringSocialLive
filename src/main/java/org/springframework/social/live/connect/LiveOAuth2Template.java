@@ -1,5 +1,7 @@
 package org.springframework.social.live.connect;
 
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
 
 public class LiveOAuth2Template extends OAuth2Template  {
@@ -15,6 +17,17 @@ public class LiveOAuth2Template extends OAuth2Template  {
 		super(clientId, clientSecret,AUTHORIZE_URL, ACCESS_TOKEN_URL);
 		setUseParametersForClientAuthentication(true);
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.springframework.social.oauth2.OAuth2Template#buildAuthorizeUrl(org.springframework.social.oauth2.GrantType, org.springframework.social.oauth2.OAuth2Parameters)
+	 */
+	@Override
+	public String buildAuthorizeUrl(GrantType grantType, OAuth2Parameters parameters) {
+		parameters.setScope("wl.skydrive_update,wl.skydrive,wl.offline_access,onedrive.readwrite");
+		return super.buildAuthorizeUrl(grantType, parameters);
+	}
+	
+	
 }
 
 
